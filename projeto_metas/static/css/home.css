@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+nav {
+  align-items: flex-start;
+  background-color: #7fe75f;
+  gap: 20px;
+}
+
+p {
+  color: #7fe75f;
+}
