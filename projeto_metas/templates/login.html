@@ -52,24 +52,21 @@
     <br />
     <br />
     <main class="d-flex justify-content-center">
-      <form>
+      <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">User name</label>
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-          />
+          <input type="text" name="nome" class="form-control" required />
           <div id="emailHelp" class="form-text"></div>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
           <input
             style="width: 400px"
+            name="senha1"
             type="password"
             class="form-control"
-            id="exampleInputPassword1"
+            required
           />
         </div>
 

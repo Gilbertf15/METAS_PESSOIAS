@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'projeto_metas',
 ]
 
+AUTH_USER_MODEL = "projeto_metas.Users"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -78,7 +80,7 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "metaspessoais",
+        "NAME": "metaspessoaisdb",
         "USER": "root",
         "PASSWORD": "8890100",
         "HOST": "127.0.0.1",
