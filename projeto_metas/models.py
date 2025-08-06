@@ -26,12 +26,22 @@ class Goal(models.Model):
     Args:
         models (_type_): _description_
     """
+
+    CLASSIFICACAO_META = [
+        (1, 'importante'),
+        (2, 'intermediario'),
+        (3, 'não importante'),
+    ]
+
     users = models.ForeignKey(Users, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, null=False, blank=False)
     description = models.TextField()
-    target_value = models.IntegerField()
-    current_value = models.IntegerField()
+    target_value = models.IntegerField(choices=CLASSIFICACAO_META) #classificação
+    current_value = models.IntegerField() # progressso
 
     data_add = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.nome
 
 

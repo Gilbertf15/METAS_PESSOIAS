@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import get_user_model, login,authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from .models import Goal
+from .forms import GoalForm
 
 
 # Create your views here.
@@ -14,19 +16,18 @@ class ViewsHome:
 
     """
     
+
+    # metodo estatico para para rota home do sistema
     @staticmethod
     def home(request):
        
         return render(request, 'home.html')
     
+
+    # metodo estatico para login do usuario
     @staticmethod
     def login(request):
         
-
-        """if not request.user.is_authenticated:
-            return print("ERROR LOGIN")
-        render(request, "myapp/login_error.html") """
-
 
         if request.method == 'POST':
             nome = request.POST.get('nome', "").strip()
@@ -55,6 +56,7 @@ class ViewsHome:
     
     @staticmethod
     
+    # metodo estatico para cadastro do usuario
     def cadastro(request):
         """if request.user.is_authenticated:
             return redirect('painel')"""
@@ -94,7 +96,69 @@ class ViewsHome:
 class PainelUser(LoginRequiredMixin, View):
     login_url='login'
     
+    # metodo para verificar se o usuario esta autenticado para acessar o painel
     def get(self, request):
+        
         if not request.user.is_authenticated:
             return redirect('login')
         return render(request, 'painel.html')
+
+    @staticmethod
+    @login_required
+    def listgoal(request):
+        goal = Goal.objects.all()
+
+        return render(request, 'listgoal.html', {'goal': goal})
+
+    @staticmethod
+    @login_required
+    #medoto estatico e necessario login para criar tarefa
+    def goalcreate(request):
+        if request.method == 'POST':
+            formcreate = GoalForm(request.POST)
+            #formcreate.users_id = request.user.id
+            if formcreate.is_valid():
+                postform = formcreate.save(commit=False)
+
+                postform.users = request.user
+
+                postform.save()
+
+                return redirect("listgoal")
+
+        else:
+            formcreate = GoalForm()
+
+        return render(request, 'creategoal.html', {'formcreate': formcreate})
+
+    @staticmethod
+    @login_required
+    # metodo estatico e necessario login para atualizar a tarefa 
+    def goalupdate(request, pk):
+        goalinstance = get_object_or_404(Goal, pk=pk)
+        formupdate = GoalForm(request.POST or None, instance=goalinstance) # formulario com os dados do banco 
+      
+            # validando formulario
+        if formupdate.is_valid():
+            formupdate.save()
+
+            return redirect('listgoal')
+        return render(request, 'editegoal.html', {'formupdate': formupdate})
+        
+
+    @staticmethod
+    @login_required
+    # metodo estatico e necessario login para excluir uma meta do usuario no banco 
+    def goaldelete(request, pk):
+        goaldelete = get_object_or_404(Goal, pk=pk) # aqui faz a busca do produto (pra não esquecer depois)
+
+        if request.method == 'POST':
+            goaldelete.delete()
+
+            return redirect('listgoal')
+
+        return render(request, 'goaldelete.html', {'goaldelete': goaldelete})
+
+    
+            
+
