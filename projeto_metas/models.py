@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
 
@@ -37,7 +38,7 @@ class Goal(models.Model):
     title = models.CharField(max_length=100, null=False, blank=False)
     description = models.TextField()
     target_value = models.IntegerField(choices=CLASSIFICACAO_META) #classificação
-    current_value = models.IntegerField() # progressso
+    current_value = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)]) # progressso
 
     data_add = models.DateTimeField(auto_now_add=True)
 

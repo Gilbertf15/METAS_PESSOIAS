@@ -1,8 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+   
     <title>Document</title>
   </head>
   <body>
@@ -11,9 +15,33 @@
         {% if formupdate.instance.pk %} editar {% else %} criar {% endif %} meta
       </h2>
       <form method="POST">
-        {% csrf_token %} {{ formupdate }}
+        {% csrf_token %} {{ formupdate.title }} 
+        {{ formupdate.description }} 
+        </br>
+        {{formupdate.target_value }} 
+        </br>
+        <label for="{{ formupdate.current_value.id_for_label }}" id="goal"> </label>
+        </br>
+        {{ formupdate.current_value }}
+        </br>
+        {{ formupdate.data_add }}
+        </br>
+        
+        
         <button type="submit">update</button>
       </form>
     </main>
+    
+    <script src="{% static 'app_static/js/editegoal.js' %}"></script>
   </body>
+  <script>
+      document
+    .getElementById("id_current_value")
+    .addEventListener("input", function () {
+      const valor = this.value;
+      document.getElementById("goal").textContent = valor + "0%";
+      console.log(valor);
+    });
+  </script>
+   
 </html>

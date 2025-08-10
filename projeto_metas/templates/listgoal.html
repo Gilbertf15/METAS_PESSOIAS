@@ -3,16 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+
+    <link
+      rel="stylesheet"
+      href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/webawesome.css"
+    />
+    <script
+      type="module"
+      src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"
+    ></script>
+    <title>Lista Metas Pessoais</title>
   </head>
   <body>
     <main>
-      <div class="list-goal">
+      <div class="container-list-goal">
         <ul>
           {% for goa in goal %}
           <li>
-            {{ goa.title }} {{goa.description}} {{goa.target_value}}
-            {{goa.current_value}} {{goa.data_add}}
+            <div class="container-goal">
+              <p>{{ goa.title }}</p>
+              <p>{{ goa.description }}</p>
+              <p>{{ goa.target_value }}</p>
+              <p>{{ goa.current_value}}0%</p>
+              <p>{{ goa.data_add }}</p>
+              <a href="{% url 'goalupdate' goa.id%}"
+                ><wa-button>update</wa-button></a
+              >
+              <a href="{% url 'goaldelete' goa.id%}"
+                ><wa-button>excluir</wa-button></a
+              >
+            </div>
           </li>
         </ul>
 
