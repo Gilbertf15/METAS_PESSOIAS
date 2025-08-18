@@ -4,13 +4,24 @@
   box-sizing: border-box;
 }
 
-nav {
-  align-items: flex-start;
-  background-color: #7fe75f;
-  gap: 20px;
-}
-
-form {
+.main-login {
+  display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
+  text-align: center;
+
+  right: -400px;
+  margin: 10px;
+  height: 500px;
+  width: 500px;
+}
+
+.login-form {
+  display: block;
+  justify-items: center;
+  text-align: center;
+
+  height: 300px;
+  width: 450px;
 }

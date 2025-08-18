@@ -7,13 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="palavras chave" />
     <meta name="description" content="Desscrição so site" />
-    <title>Document</title>
+    <title>Login Usuario</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
-      crossorigin="anonymous"
+      href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/webawesome.css"
     />
+    <script
+      type="module"
+      src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"
+    ></script>
 
     <link
       rel="stylesheet"
@@ -25,26 +27,35 @@
     <br />
     <br />
     <br />
-    <main class="d-flex justify-content-center">
-      <form action="{% url 'login' %}" method="POST">
+    <main class="main-login">
+      <form class="login-form" action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">User name</label>
-          <input type="text" name="nome" class="form-control" required />
-          <div id="emailHelp" class="form-text"></div>
+          <wa-input
+            name="nome"
+            label="Digite seu nome de usuario"
+            placeholder="nome usuario"
+            required
+          ></wa-input>
         </div>
+        <br />
+        <br />
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            style="width: 400px"
+          <wa-input
+            size="small"
+            label="Digite sua senha"
             name="senha1"
             type="password"
             class="form-control"
+            placeholder="sua senha"
+            password-toggle
             required
-          />
+          ></wa-input>
         </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <br />
+        <wa-button type="submit" appearance="outlined" variant="neutral"
+          >Login</wa-button
+        >
       </form>
     </main>
   </body>

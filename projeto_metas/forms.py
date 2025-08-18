@@ -2,6 +2,11 @@ from django import forms
 from .models import Goal
 
 class GoalForm(forms.ModelForm):
+    """_summary_
+
+    Args:
+        forms (_type_): _description_
+    """
     class Meta:
         model = Goal
         fields = ['title', 'description', 'target_value', 'current_value']

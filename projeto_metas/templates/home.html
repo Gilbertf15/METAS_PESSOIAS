@@ -24,10 +24,11 @@
   <body>
     <nav class="nav-bar">
       <wa-button-group label="Alignment">
-        <wa-button appearance="outlined" variant="neutral">login</wa-button>
+        <a href="{% url 'login'%}" class="hre-but"
+          ><wa-button appearance="outlined" variant="neutral">login</wa-button></a>
         </br>
-        </br>
-        <wa-button appearance="outlined" variant="neutral">cadastro</wa-button>
+        <a href="{% url 'cadastro'%}" class="hre-but"
+          ><wa-button appearance="outlined" variant="neutral">cadastro</wa-button></a>
       </wa-button-group>
     </nav>
     
