@@ -9,26 +9,19 @@ from .models import Goal
 from .forms import GoalForm
 
 
-# Create your views here.
+
 User = get_user_model()
 class ViewsHome:
-    """_summary_
-
-    """
-    
-
-    # metodo estatico para para rota home do sistema
+   
     @staticmethod
     def home(request):
        
         return render(request, 'home.html')
-    
 
     # metodo estatico para login do usuario
     @staticmethod
     def login(request):
         
-
         if request.method == 'POST':
             nome = request.POST.get('nome', "").strip()
             password  = request.POST.get('senha1')
@@ -55,11 +48,13 @@ class ViewsHome:
         return render(request, 'login.html')
     
     @staticmethod
-    
+    def testecard(request):
+        return render(request, 'testecard.html')
+
+    @staticmethod
     # metodo estatico para cadastro do usuario
     def cadastro(request):
-        """if request.user.is_authenticated:
-            return redirect('painel')"""
+       
         
         if request.method == 'POST':
             nome = request.POST.get('username')
@@ -94,6 +89,11 @@ class ViewsHome:
         return redirect('login')
     
 class PainelUser(LoginRequiredMixin, View):
+
+    """VIEWS REFERENTES AO PAINEL DO USUARIO
+
+    
+    """
     login_url='login'
     
     # metodo para verificar se o usuario esta autenticado para acessar o painel
@@ -150,7 +150,7 @@ class PainelUser(LoginRequiredMixin, View):
     @login_required
     # metodo estatico e necessario login para excluir uma meta do usuario no banco 
     def goaldelete(request, pk):
-        goaldelete = get_object_or_404(Goal, pk=pk) # aqui faz a busca do produto (pra não esquecer depois)
+        goaldelete = get_object_or_404(Goal, pk=pk) # aqui faz a busca do produto 
 
         if request.method == 'POST':
             goaldelete.delete()
@@ -158,6 +158,13 @@ class PainelUser(LoginRequiredMixin, View):
             return redirect('listgoal')
 
         return render(request, 'goaldelete.html', {'goaldelete': goaldelete})
+
+
+    @login_required
+    @staticmethod
+    def painel(request):
+        goal = Goal.objects.all()
+        return render(request, 'painel.html', {'goal': goal})
 
     
             

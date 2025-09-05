@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,102 +6,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="palavras chave" />
     <meta name="description" content="Desscrição so site" />
-    <title>Document</title>
+
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
-      crossorigin="anonymous"
+      href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/webawesome.css"
     />
+    <script
+      type="module"
+      src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"
+    ></script>
+    <link rel="stylesheet" href="{% static 'css/painel.css' %}" />
+    <title>Painel Usario</title>
   </head>
   <body>
     <header>
-      <nav class="navbar bg-body-tertiary fixed-top">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="">Bem vindo a suas metas</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div
-            class="offcanvas offcanvas-end"
-            tabindex="-1"
-            id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel"
-          >
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-                Bem vindo a suas metas
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#"
-                    >Perfil</a
-                  >
-                </li>
-                
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Sobre</a>
-                </li>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Logout</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Metas
-                  </a>
-                  <ul class="dropdown-menu">
-          
-                    <li>
-                      <a class="dropdown-item" href="#">Visualizar Tarefas</a>
-                    </li>
-                  
-                  </ul>
-                </li>
-              </ul>
-              
-            </div>
+      <button onclick="inserirestilo()" id="abrir-nav">. > .</button>
+      <nav id="nav-lateral">
+        <div class="nav-lateral-content">
+          <br />
+
+          <span id="user_id"> Bem vindo </span>
+          <br />
+          <span id="user_id">ao pianel de metas</span>
+          <br />
+          <br />
+
+          <ul id="items-nav">
+            <li class="nav-link">
+              <a href="#">
+                <span class="item-descricao">Metas Cadastradas</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="#">
+                <span class="item-descricao">Metas excluidas</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="#">
+                <span class="item-descricao">Area usuario</span>
+              </a>
+            </li>
+
+            <li class="nav-link">
+              <a href="#">
+                <span class="item-descricao">Configuraçôes</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div id="logout">
+          <div class="logout-btn">
+            <i class=""></i>
+            <button id="button-logout" type="button">logout</button>
           </div>
         </div>
       </nav>
     </header>
 
-    <section><main>
-      <div class="container">
+    <div class="container">
+      <h1>Minhas Metas</h1>
 
-      </div>
-    </main></section>
+      <button class="btn-criar-meta" type="button">+</button>
 
-   
-    </main>
-
-    <footer class="foot_gra"></footer>
+      <div class="cards">
+        <ul>
+          {% for goa in goal %}
+            <div class="card">
+              <li>
+                
+                  <h3 id="h3-meta">{{ goa.title }}</h3>
+                  <p id="p-description">{{ goa.description }}</p>
+                  <p class="p-meta">{{ goa.current_value}}0%</p>
+                  <p class="p-meta">{{ goa.data_add }}</p>
+                  <a href="#" class="btn">Saiba mais</a>
+                  <a href="#" class="btn">Saiba mais</a>
+                </li>
+                
+            
+         
+          </div>
+        </ul>
+      {% endfor %}
+    </div>
   </body>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-    crossorigin="anonymous"
-  ></script>
+  <script src="{% static 'js/painel.js' %}"></script>
 </html>

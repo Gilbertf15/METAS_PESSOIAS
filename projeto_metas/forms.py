@@ -2,10 +2,9 @@ from django import forms
 from .models import Goal
 
 class GoalForm(forms.ModelForm):
-    """_summary_
+    """FORMULARIO DE METAS DO USUARIO
 
-    Args:
-        forms (_type_): _description_
+    
     """
     class Meta:
         model = Goal
